@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class CCC19J5 {
     // In order to not time out, we have to utilize Dynamic Programming and keep a set of all failed cases
     // This set must have a key that has both a String and an Integer (the current state and the steps left)
     // The MultiKey class is simply a class that can hold two values.
@@ -21,7 +21,7 @@ public class Main {
             if(!(another instanceof MultiKey)) {
                 return false;
             }
-            MultiKey k = (MultiKey) another;
+            MultiKey<?, ?> k = (MultiKey<?, ?>) another;
             return a.equals(k.a) && b.equals(k.b);
         }
         // Override hashCode so that if two MultiKeys are equal, they would have the same hash.
