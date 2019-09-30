@@ -1,4 +1,5 @@
 .vscode
 *.out
 *.log
-
+*.class
+*.o

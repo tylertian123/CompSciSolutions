@@ -7,10 +7,10 @@ sums = []
 
 for i in range(n):
     triangle.append([int(num) for num in input().split()])
-    sums.append([nan] * len(triangle[i]))
+    sums.append([-1] * len(triangle[i]))
 
 def triangle_sum(row, col):
-    if not isnan(sums[row][col]):
+    if sums[row][col] != -1:
         return sums[row][col]
     if row == len(triangle) - 1:
         sums[row][col] = triangle[row][col]
