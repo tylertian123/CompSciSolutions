@@ -1,9 +1,15 @@
 """
 Python solution for CCC '13 J4 - Who is Taller?
-
-Note: The algorithm presented in this solution is correct, but this TLEs in the later test cases.
-See the C++ implementation of this same algorithm for something that will pass the judge.
 """
+
+import sys
+_all_data = sys.stdin.read().split('\n')
+_line = -1
+def _input():
+    global _line
+    _line += 1
+    return _all_data[_line]
+input = _input
 
 from queue import Queue
 n, m = input().split()
