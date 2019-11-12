@@ -29,8 +29,7 @@ for i in range(pages):
 next = Queue()
 # Keep track of what's already been visited
 visited = [ False for i in range(pages) ]
-# Keep track of what's already in the queue but not visited
-queued = [ False for i in range(pages) ]
+visited[0] = True
 # Keep track of how we got to each page
 parent = [ None for i in range(pages) ]
 # Start on page 1 (index 0)
@@ -40,18 +39,16 @@ next.put(0)
 while not next.empty():
     # Get the next page to visit
     current = next.get()
-    # Mark the page as visited
-    visited[current] = True
     # For each child
     for child in graph[current]:
         # If not visited and not already in queue
-        if not visited[child] and not queued[child]:
+        if not visited[child]:
             # Put the child in the queue
             next.put(child)
             # Record the child's parent
             parent[child] = current
             # Mark the child as in queue
-            queued[child] = True
+            visited[child] = True
 
 # See of all pages were visited
 all_visited = True
