@@ -1,3 +1,7 @@
+"""
+Python solution for CCC '04 S3 - Spreadsheet
+"""
+
 from math import nan, isnan
 import sys
 

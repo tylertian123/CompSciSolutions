@@ -1,5 +1,5 @@
 """
-Python solution for CCC '13 J4 - Who is Taller?
+Python solution for CCC '13 S4 - Who is Taller?
 """
 
 import sys
