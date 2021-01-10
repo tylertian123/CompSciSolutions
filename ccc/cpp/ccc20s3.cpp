@@ -36,8 +36,9 @@ namespace std {
 }
 
 int main() {
-    // Magic p value used for polynomial rolling hash
-    constexpr int HASH_P = 29;
+    // Magic values used for polynomial rolling hash
+    constexpr unsigned long long HASH_P = 29;
+    constexpr unsigned long long HASH_M = 1000000009;
     
     std::scanf("%s", needle);
     std::scanf("%s", haystack);
@@ -67,13 +68,14 @@ int main() {
         needle_freq[needle[i]] ++;
         haystack_freq[haystack[i]] ++;
 
-        hash += haystack[i] * hash_multiplier;
+        hash += haystack[i] * hash_multiplier % HASH_M;
         // hash_multiplier is the p^n value for the largest power
         // so don't multiply again after the last term
         if (i != 0) {
-            hash_multiplier *= HASH_P;
+            hash_multiplier = hash_multiplier * HASH_P % HASH_M;
         }
     }
+    hash %= HASH_M;
     // Initialize and account for a possible initial match
     std::unordered_set<permutation> seen;
     long long count = 0;
@@ -91,9 +93,14 @@ int main() {
         haystack_freq[prev] --;
         haystack_freq[end] ++;
         // Compute new hash
-        hash -= prev * hash_multiplier;
+        size_t h = prev * hash_multiplier % HASH_M;
+        if (h > hash) {
+            hash += HASH_M;
+        }
+        hash -= h;
         hash *= HASH_P;
         hash += end;
+        hash %= HASH_M;
         // Check
         if (needle_freq == haystack_freq && seen.insert({hash, i}).second) {
             count ++;
