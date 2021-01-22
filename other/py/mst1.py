@@ -62,28 +62,30 @@ def dist(a, b):
 points = [[int(i) for i in input().split()] for _ in range(int(input()))]
 k = int(input())
 
+from typing import List
+
 # Disjoint sets algorithm
 # See https://en.wikipedia.org/wiki/Disjoint-set_data_structure
-def ds_make(n: int):
+def ds_make(n: int) -> List[int]:
     """
-    Make n sets containing the numbers 0 to n - 1.
+    Make n subsets containing the numbers 0 to n - 1.
     """
     # The value of element i is the parent of that set
     # If parent is itself then it's the root
     return [i for i in range(n)]
 
-def ds_find(s, x):
+def ds_find(s: List[int], x: int) -> int:
     """
-    Find the set containing x in s.
+    Find the subset containing x in s.
     """
     if s[x] != x:
         # Apply path compression
         s[x] = ds_find(s, s[x])
     return s[x]
 
-def ds_union(s, x, y):
+def ds_union(s: List[int], x: int, y: int) -> None:
     """
-    Merge the two sets x and y in s.
+    Merge the two subsets x and y in s.
     """
     xr = ds_find(s, x)
     yr = ds_find(s, y)
